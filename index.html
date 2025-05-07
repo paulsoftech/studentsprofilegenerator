@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Profile Generator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #5b05fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #000407;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header h1 {
+      margin: 0;
+      text-align: center;
+      flex: 1;
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      background-color: red;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-section {
+      background-color: #fff8dc;
+      padding: 20px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .search-section input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .search-section button {
+      padding: 10px 15px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .search-section button:hover {
+      background-color: #002b5c;
+    }
+
+    .student-profile {
+      background-color: #e6f2ff;
+      margin-top: 20px;
+      padding: 15px;
+      border-left: 5px solid #004080;
+      border-radius: 6px;
+      width: 100%;
+      max-width: 500px;
+      display: none;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 12px 0;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 18px;
+      }
+
+      .search-section, .student-profile {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/School_icon.svg/1024px-School_icon.svg.png" alt="Paulsoftech">
+    <h1>Student Profile Generator</h1>
+    <div style="width: 50px;"></div>
+  </header>
+
+  <main>
+    <div class="search-section">
+      <label for="scoreInput"><strong>Enter Student Score:</strong></label>
+      <input type="number" id="scoreInput" placeholder="e.g. 85" />
+      <button onclick="findStudent()">Search</button>
+    </div>
+
+    <div id="profileResult" class="student-profile"></div>
+  </main>
+
+  <footer>
+    &copy; 2025 Student Profile Generator, built with love by Paul Adekanye. All rights reserved.
+  </footer>
+
+  <script>
+    const students = [
+      { firstName: 'Paul', lastName: 'Adekanye', age: 19, score: 85, courses: ['Math', 'Physics'] },
+      { firstName: 'Linda', lastName: 'Okoro', age: 21, score: 91, courses: ['Biology', 'Chemistry', 'English'] },
+      { firstName: 'Ifeanyi', lastName: 'Eze', age: 20, score: 78, courses: ['Economics', 'Accounting'] },
+      { firstName: 'Grace', lastName: 'Daniels', age: 18, score: 88, courses: ['Literature', 'History'] },
+      { firstName: 'Tolu', lastName: 'Adebayo', age: 23, score: 95, courses: ['Computer Science', 'Mathematics'] },
+      { firstName: 'Baba', lastName: 'Ali', age: 25, score: 75, courses: ['Civil Education', 'Mathematics'] },
+      { firstName: 'Timi', lastName: 'Adebayo', age: 34, score: 100, courses: ['Algebra', 'Mathematics'] },
+      { firstName: 'Promise', lastName: 'Stephen', age: 22, score: 90, courses: ['Chemistry', 'Mathematics'] },
+      { firstName: 'Andrew', lastName: 'Ededem', age: 28, score: 74, courses: ['Biology', 'Mathematics'] },
+      { firstName: 'Tolu', lastName: 'Adefarati', age: 27, score: 68, courses: ['English', 'Government'] }
+    ];
+
+    function findStudent() {
+      const inputScore = parseInt(document.getElementById('scoreInput').value);
+      const resultDiv = document.getElementById('profileResult');
+
+      const student = students.find(s => s.score === inputScore);
+
+      if (student) {
+        const { firstName, lastName, age, score, courses } = student;
+        resultDiv.innerHTML = `
+          <strong>Name:</strong> ${firstName} ${lastName}<br>
+          <strong>Age:</strong> ${age}<br>
+          <strong>Score:</strong> ${score}<br>
+          <strong>Courses:</strong> ${courses.join(', ')}
+        `;
+      } else {
+        resultDiv.innerHTML = '⚠️ No student found with that score.';
+      }
+
+      resultDiv.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
